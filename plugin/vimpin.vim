@@ -3,6 +3,12 @@ let g:PinStack = 0
 
 " Open a new window with the specified lines:
 function! PinOpen(n)
+	if a:n <= 0
+		" It makes no sense to open a 0 to -ve sized
+		" buffer
+		return
+	endif
+
 	" Generate a new name for the pin buffer
 	let l:BuffName = s:NameGen(g:PinStack)
 	let g:PinStack += 1
@@ -65,7 +71,6 @@ function! s:ResizeWindows()
 	for l:BufName in range(1, bufnr('$'))
 		if bufloaded(l:BufName) && exists("b:BufferHeight")
 			" Then resize the buffer:
-			echo "win num " . l:WindowNum . " is a pin"
 			let l:WindowNum = bufwinnr(l:BufName)
 			execute l:WindowNum . "wincmd m"
 			execute "normal! " . b:BufferHeight "_"
@@ -79,7 +84,11 @@ endfunction
 " This is just a wrapper funciton for pin close by name.
 " closes the function by a given number
 function! ClosePinByNumber(number) 
-	return s:ClosePinByName(s:NameGen(a:number))
+	if a:number < 0
+		return 0
+	else 
+		return s:ClosePinByName(s:NameGen(a:number))
+	endif
 endfunction
 
 " This takes the top
