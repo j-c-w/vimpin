@@ -87,16 +87,16 @@ endfunction
 " It closes the first pin it finds
 function! PinClose()
 	let l:Found = 0
-	while g:PinStack >= 0 && !l:Found
-		let l:Found = ClosePinByNumber(g:PinStack)
+	while g:PinStack > 0 && !l:Found
 		let g:PinStack -= 1
+		let l:Found = ClosePinByNumber(g:PinStack)
 	endwhile
 endfunction
 
 function! PinCloseAll()
-	while g:PinStack >= 0
-		call ClosePinByNumber(g:PinStack)
+	while g:PinStack > 0
 		let g:PinStack -= 1
+		call ClosePinByNumber(g:PinStack)
 	endwhile
 endfunction
 
