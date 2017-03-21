@@ -32,6 +32,6 @@ Closing a pin closes the most recently opened pin.
 
 Example:
 
-![demo] (https://raw.githubusercontent.com/wiki/j-c-w/vimpin/demo.gif)
+![demo](https://raw.githubusercontent.com/wiki/j-c-w/vimpin/demo.gif)
 
 
