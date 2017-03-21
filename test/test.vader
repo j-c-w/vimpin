@@ -34,7 +34,7 @@ Execute (Opening a buffer afterwards should be ok):
   PinOpen(2)
   AssertEqual 3, g:PinStack, 'Pin opened'
   AssertNotEqual -1, (bufwinnr('Pin2')), 'Buffer pin2 exists again'
-  AssertEqual 2, len(getbufline('Pin0', 1, 1)), 'Contents length as expected'
+  AssertEqual 2, len(getbufline('Pin2', 1, 2)), 'Contents length as expected'
 
 Execute (Closing all buffers should close all buffers):
   PinCloseAll
