@@ -1,0 +1,47 @@
+Given (Some text in a file):
+  Hi
+  This is some text
+  In a file
+  It could potentially be pinned
+
+Do (Load the plugin):
+  :so ../plugin/vimpin.vim
+
+Execute (A Pin should open):
+  PinOpen(1)
+  " -1 is returned by bufnr if that buffer does not 
+  " exist
+  AssertEqual 1, g:PinStack, 'One pin created'
+  AssertNotEqual -1, (bufnr('Pin0')), 'Buffer Pin0 exists'
+
+Execute (Opening another two pins should work): 
+  :normal! j
+  PinOpen(3)
+  PinOpen(1)
+  AssertEqual 3, g:PinStack, 'Another pin created'
+  AssertNotEqual -1, (bufnr('Pin1')), 'Buffer Pin1 exists'
+
+Execute (Contents should be as specified at the beginning):
+  AssertEqual 1, len(getbufline('Pin0', 1, 1)), 'Contents one line long'
+  AssertEqual "Hi", getbufline('Pin0', 1, 1)[0], 'Contents as expected'
+
+Execute (Closing one buffer should close Pin2):
+  PinClose
+  AssertEqual 2, g:PinStack, 'Pin deleted'
+  AssertEqual -1, (bufwinnr('Pin2')), 'Buffer pin2 no longer exists'
+
+Execute (Opening a buffer afterwards should be ok):
+  PinOpen(2)
+  AssertEqual 3, g:PinStack, 'Pin opened'
+  AssertNotEqual -1, (bufwinnr('Pin2')), 'Buffer pin2 exists again'
+  AssertEqual 2, len(getbufline('Pin0', 1, 1)), 'Contents length as expected'
+
+Execute (Closing all buffers should close all buffers):
+  PinCloseAll
+  AssertEqual 0, g:PinStack, 'Pins deleted'
+  AssertEqual -1, (bufwinnr('Pin1')), 'Buffer pin 1 no longer exists'
+  AssertEqual -1, (bufwinnr('Pin0')), 'Buffer pin 0 no longer exists'
+
+After:
+  " Do some cleanup
+  PinCloseAll()
