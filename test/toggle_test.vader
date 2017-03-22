@@ -1,0 +1,30 @@
+Given(some text in a buffer):
+  This is some text
+  Hi
+  that appears in the buffer
+
+Do(load the plugin):
+  :so ../plugin/vimpin.vim
+
+Execute(toggling a pin should open it):
+  :PinToggle(2)
+  AssertEqual 1, g:PinStack, 'Pin created'
+  :PinToggle(2)
+  AssertEqual 1, g:PinStack, 'Pin Not destroyed'
+
+Execute(it should have the right contents):
+  :PinToggle(3)
+  AssertNotEqual -1, bufwinnr('Pin0'), 'window exists'
+  AssertEqual 'Hi', getbufline('Pin0', 2, 2)[0], 'Contents ok'
+
+Execute(it should be closed when toggle of 0 is called):
+  :PinToggle(0)
+  AssertEqual -1, bufwinnr('Pin0'), 'window closed'
+
+Execute(it should work ok when we go out of bounds of the buffer):
+  :PinToggle(10000)
+  AssertEqual 3, len(getbufline('Pin0', 1, 5)), 'contents ok'
+
+Execute(should close again when toggle -ve is called):
+  :PinToggle(-5)
+  AssertEqual -1, bufwinnr('Pin0'), 'window closed'
