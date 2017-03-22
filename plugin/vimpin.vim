@@ -25,7 +25,9 @@ function! PinOpen(n)
 	execute "new " . l:BuffName
 	" Paste and format
 	execute "normal! \"apkdd"
-	execute "setfiletype " . l:FileType
+	if l:FileType !=# ""
+		execute "setfiletype " . l:FileType
+	endif
 	" Set the right height
 	execute "normal! " . a:n . "_"
 	" Also store the buffer height in the window
