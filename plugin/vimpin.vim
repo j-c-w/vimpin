@@ -12,6 +12,7 @@ function! PinOpen(n)
 	" Generate a new name for the pin buffer
 	let l:BuffName = s:NameGen(g:PinStack)
 	let g:PinStack += 1
+	let l:FileType = &filetype
 	" Gets the position so that it can be set.
 	let l:Position = getpos('.')
 	" Save the buffer before overwriting
@@ -24,6 +25,7 @@ function! PinOpen(n)
 	execute "new " . l:BuffName
 	" Paste and format
 	execute "normal! \"apkdd"
+	execute "setfiletype " . l:FileType
 	" Set the right height
 	execute "normal! " . a:n . "_"
 	" Also store the buffer height in the window
