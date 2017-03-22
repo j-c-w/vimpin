@@ -38,6 +38,18 @@ function! PinOpen(n)
 	call s:ResizeWindows()
 endfunction
 
+" This is for use in single pin mode
+" Toggles the only open pin
+function! TogglePin(num)
+	if g:PinStack >= 1
+		" Close pin
+		let l:Closed = PinClose()
+	endif
+	" Open pin using num lines now
+	" If its 0 then it will be closed
+	call PinOpen(a:num)
+endfunction
+
 " This creates a name for the buffer that 
 " corresponds to the ones wer are keeping track of
 function! s:NameGen(num)
@@ -112,6 +124,7 @@ endfunction
 " Now, using these functions, we create 
 " these commands:
 command! -nargs=1 PinOpen call PinOpen(<args>)
+command! -nargs=1 TogglePin call TogglePin(<args>)
 command! -nargs=1 PinCloseN call ClosePinByNumber(<args>)
 command! PinClose call PinClose()
 command! PinCloseAll call PinCloseAll()
