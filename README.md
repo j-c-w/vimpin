@@ -11,7 +11,19 @@ Install using Vundle by adding the following to your `.vimrc`:
     Bundle 'j-c-w/vimpin'
     :BundleInstall
 
-# Setup
+# Setup (Recommended)
+
+Map the following command:
+
+    " Pin toggling:
+	nnoremap <leader>p :<C-U>PinToggle(v:count)<CR>
+
+Then press `N<leader>p` to open an `N` line pin, and 
+`<leader>p` to close this pin.
+
+
+
+# Setup (for multiple simultaneous pins)
 
 Map the following (with the keybindings as you wish):
 
