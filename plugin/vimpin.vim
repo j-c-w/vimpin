@@ -40,7 +40,7 @@ endfunction
 
 " This is for use in single pin mode
 " Toggles the only open pin
-function! TogglePin(num)
+function! PinToggle(num)
 	if g:PinStack >= 1
 		" Close pin
 		let l:Closed = PinClose()
@@ -124,7 +124,7 @@ endfunction
 " Now, using these functions, we create 
 " these commands:
 command! -nargs=1 PinOpen call PinOpen(<args>)
-command! -nargs=1 TogglePin call TogglePin(<args>)
+command! -nargs=1 PinToggle call PinToggle(<args>)
 command! -nargs=1 PinCloseN call ClosePinByNumber(<args>)
 command! PinClose call PinClose()
 command! PinCloseAll call PinCloseAll()
