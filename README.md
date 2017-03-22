@@ -1,12 +1,17 @@
+# vimpin
+---------
+![build status](https://travis-ci.org/j-c-w/vimpin.svg?branch=master)
+
 This is a plugin for vim that allows you to pin some lines to the top of the screen.
 
-#Intsall
+# Intsall
+
 Install using Vundle by adding the following to your `.vimrc`:
 
     Bundle 'j-c-w/vimpin'
     :BundleInstall
 
-#Setup
+# Setup
 
 Map the following (with the keybindings as you wish):
 
@@ -24,15 +29,13 @@ And optionally:
     nnoremap <leader><leader>n :<C-U>PinCloseN(v:count)<CR>
 
 
-#Use
+# Use
 
 Vimpin keeps a stack of pins that have been opened. They open
 from the top of the screen downwards.
 
 Closing a pin closes the most recently opened pin.
 
-Example:
+# Example
 
 ![demo](https://raw.githubusercontent.com/wiki/j-c-w/vimpin/demo.gif)
-
-
