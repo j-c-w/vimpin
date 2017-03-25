@@ -45,13 +45,21 @@ endfunction
 " This is for use in single pin mode
 " Toggles the only open pin
 function! PinToggle(num)
+	let l:NumOpened = a:num
 	if g:PinStack >= 1
 		" Close pin
 		let l:Closed = PinClose()
+	else 
+		" There is no pin
+		" So open a single line pin
+		" if the num is 0
+		if a:num == 0
+			let l:NumOpened = 1
+		endif
 	endif
 	" Open pin using num lines now
 	" If its 0 then it will be closed
-	call PinOpen(a:num)
+	call PinOpen(l:NumOpened)
 endfunction
 
 " This creates a name for the buffer that 
