@@ -34,6 +34,8 @@ function! PinOpen(n)
 	" so it can be reset whenever it needs to be
 	let b:BufferHeight = a:n
 	execute "set wfh"
+	execute "set buftype=nofile"
+	execute "set nowrite"
 	" and swap back to the buffer we were in before
 	:normal! j
 	" Finally, reset the contents of @a
