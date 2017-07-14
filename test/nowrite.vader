@@ -1,0 +1,15 @@
+Given:
+  text
+
+Do:
+  :so ../plugin/vimpin.vim
+
+Execute:
+  :PinOpen(10)
+  :normal k
+  AssertThrows :w
+  :normal j
+  AssertEqual filereadable("Pin0"), 0, "file not created"
+
+After:
+  :PinCloseAll()
