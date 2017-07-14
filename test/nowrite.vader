@@ -5,11 +5,12 @@ Do:
   :so ../plugin/vimpin.vim
 
 Execute:
-  :PinOpen(10)
+  :PinOpen(1)
   :normal k
   AssertThrows :w
   :normal j
   AssertEqual filereadable("Pin0"), 0, "file not created"
+  call PinClose()
 
 After:
-  :PinCloseAll()
+  PinCloseAll()
